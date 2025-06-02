@@ -1,0 +1,18 @@
+<select id="selectFromArticleAuthorView" resultType="com.ruoyi.system.vo.ArticleAuthorDetailVO">
+    SELECT
+    article_id,
+    title,
+    content,
+    publish_date,
+    author_id,
+    author_username,
+    author_email,
+    source_platform,
+    comment_count
+    FROM
+    View_ArticleAuthorDetails
+    <if test="titleKeyword != null and titleKeyword != ''">
+        WHERE title LIKE CONCAT('%', #{titleKeyword}, '%')
+    </if>
+    ORDER BY publish_date DESC
+</select>
