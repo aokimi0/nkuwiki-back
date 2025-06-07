@@ -19,8 +19,8 @@ public interface ArticlesMapper extends BaseMapperX<ArticlesDO> {
 
     default PageResult<ArticlesDO> selectPage(ArticlesPageReqVO reqVO) {
         return selectPage(reqVO, new LambdaQueryWrapperX<ArticlesDO>()
-                .eqIfPresent(ArticlesDO::getTitle, reqVO.getTitle())
-                .eqIfPresent(ArticlesDO::getContent, reqVO.getContent())
+                .likeIfPresent(ArticlesDO::getTitle, reqVO.getTitle())      // title 模糊匹配
+                .likeIfPresent(ArticlesDO::getContent, reqVO.getContent())  // <-- content 也修改为模糊匹配
                 .betweenIfPresent(ArticlesDO::getPublishDate, reqVO.getPublishDate())
                 .eqIfPresent(ArticlesDO::getAuthorId, reqVO.getAuthorId())
                 .eqIfPresent(ArticlesDO::getSourcePlatform, reqVO.getSourcePlatform())
